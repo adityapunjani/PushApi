@@ -28,14 +28,17 @@ app.use(bodyParser.json());
 
 app.get('/api/payload', function (req, res) {
     res.set('Content-Type', 'application/json');
-    res.header('Access-Control-Allow-Origin', "*");
     res.end(fs.readFileSync('payload.json'));
 });
 
 app.get('/api/delete', function (req, res) {
     res.set('Content-Type', 'application/json');
-    res.header('Access-Control-Allow-Origin', "*");
     fs.writeFileSync('registrations.json','[]');
+    res.end(fs.readFileSync('registrations.json'));
+});
+
+app.get('/api/get', function (req, res) {
+    res.set('Content-Type', 'application/json');
     res.end(fs.readFileSync('registrations.json'));
 });
 
