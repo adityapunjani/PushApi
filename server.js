@@ -7,6 +7,14 @@ var express = require('express'),
     https = require('https'),
     port = process.env.PORT || 9000;
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
+
+app.use(allowCrossDomain);
 app.use(compression());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -39,12 +47,6 @@ app.post('/api/register', function (req, res) {
     res.end("true");
 });
 
-app.options('/*', function (req, res) {
-    res.set('Content-Type', 'application/json');
-    res.header('Access-Control-Allow-Origin', "*");
-    res.header('Access-Control-Allow-Headers', 'content-type');
-    res.end("true");
-});
 
 var config = {
     host: 'android.googleapis.com',
