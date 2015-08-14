@@ -32,6 +32,12 @@ app.get('/api/payload', function (req, res) {
     res.end(fs.readFileSync('payload.json'));
 });
 
+app.get('/api/delete', function (req, res) {
+    res.set('Content-Type', 'application/json');
+    res.header('Access-Control-Allow-Origin', "*");
+    fs.writeFileSync('registrations.json','[]');
+    res.end(fs.readFileSync('registrations.json'));
+});
 
 app.post('/api/register', function (req, res) {
     if (typeof req.body.id === 'string') {
