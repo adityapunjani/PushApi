@@ -21,6 +21,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+fs.writeFileSync('registrations.json','[]');
+fs.writeFileSync('payload.json', {});
+
 app.get('/api/payload', function (req, res) {
     res.set('Content-Type', 'application/json');
     res.end(fs.readFileSync('payload.json'));
