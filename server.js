@@ -20,20 +20,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-app.use(bodyParser.json());
-
 app.get('/api/payload', function (req, res) {
     res.set('Content-Type', 'application/json');
     res.end(fs.readFileSync('payload.json'));
 });
 
 app.get('/api/delete', function (req, res) {
-    res.set('Content-Type', 'application/json');
     fs.writeFileSync('registrations.json','[]');
+    res.set('Content-Type', 'application/json');
     res.end(fs.readFileSync('registrations.json'));
 });
 
@@ -63,7 +57,7 @@ var config = {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-            'Authorization': 'key=AIzaSyC_UFHyubC0_46XjprGSZLHn1a07niuJyI'
+        'Authorization': 'key=AIzaSyC_UFHyubC0_46XjprGSZLHn1a07niuJyI'
     }
 };
 
@@ -95,7 +89,7 @@ app.post('/api/send', function (req, res) {
     api.write(postData);
     api.end();
     api.on('error', function (e) {
-        console.error(e);
+        res.end(e);
     });
 
 });

@@ -29,21 +29,21 @@
 </head>
 <body>
 <h2>Create Notification</h2>
-	<form id="push" action="/api/send" method="post">
+	<form id="push" action="/api/send" method="post" autocomplete="on">
 		<label for="title">Title</label>
-		<input type="text" name="title" id="title" required></input>
+		<input type="text" name="title" id="title" required value="Lorem Ipsum"></input>
 		</br>
 
 		<label for="body">Body</label>
-		<input type="text" name="body" id="body" required></input>
+		<input type="text" name="body" id="body" required value="Dolor sit amet, consectetur adipiscing elit"></input>
 		</br>
 
 		<label for="icon">Icon Link</label>
-		<input type="text" name="icon" id="icon" required></input>
+		<input type="text" name="icon" id="icon" required value="//img1a.flixcart.com/www/promos/new/20150811-140737-flipkart-app-icon.png"></input>
 		</br>
 
 		<label for="url">Url</label>
-		<input type="text" name="url" id="url" required></input>
+		<input type="text" name="url" id="url" required value="/"></input>
 		<input type="submit" id="submit"></input>
 	</form>
 
