@@ -19,6 +19,7 @@ app.use(compression());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json());
 
 app.get('/api/payload', function (req, res) {
     res.set('Content-Type', 'application/json');
