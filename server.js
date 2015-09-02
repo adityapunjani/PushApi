@@ -46,6 +46,13 @@ app.post('/api/register', function (req, res) {
         var id = req.body.id.substring(pos);
         var ids = JSON.parse(fs.readFileSync('registrations.json'));
         if (id && (ids.indexOf(id) === -1)) {
+            writePayload(req.body);
+            var postData = JSON.stringify({
+                "registration_ids": [id]
+            });
+            var api = https.request(config, function(){});
+            api.write(postData);
+            api.end();
             ids.push(id);
             fs.writeFileSync('registrations.json', JSON.stringify(ids));
         }
@@ -65,17 +72,21 @@ var config = {
     }
 };
 
-app.post('/api/send', function (req, res) {
-
+function writePayload(obj){
     var payload = {};
-    payload.title = req.body.title || '';
-    payload.body = req.body.body || '';
-    payload.icon = req.body.icon || '';
+    payload.title = (obj && obj.title) || '';
+    payload.body = (obj && obj.body) || '';
+    payload.icon = (obj && obj.icon) || '';
     payload.data = {
-        url: req.body.url || ''
+        url: (obj && obj.url) || ''
     };
 
     fs.writeFileSync('payload.json', JSON.stringify(payload));
+}
+
+app.post('/api/send', function (req, res) {
+
+    writePayload(req.body);
 
     var postData = JSON.stringify({
         "registration_ids": JSON.parse(fs.readFileSync('registrations.json'))
