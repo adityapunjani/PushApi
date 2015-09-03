@@ -48,7 +48,7 @@ app.post('/api/register', function (req, res) {
         if (id && (ids.indexOf(id) === -1)) {
             writePayload({
                 title : "Welcome to Flipkart",
-                body: "Special Offer just for you! - 20% of all Electronics",
+                body: "Special Offer just for you! - 20% off all Electronics",
                 icon: "https://img1a.flixcart.com/www/promos/new/20150811-140737-flipkart-app-icon.png",
                 data: {
                     url : "/"
