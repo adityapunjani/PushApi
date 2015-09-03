@@ -46,7 +46,14 @@ app.post('/api/register', function (req, res) {
         var id = req.body.id.substring(pos);
         var ids = JSON.parse(fs.readFileSync('registrations.json'));
         if (id && (ids.indexOf(id) === -1)) {
-            writePayload(req.body);
+            writePayload({
+                title : "Welcome to Flipkart"
+                body: "Special Offer just for you! - 20% of all Electronics",
+                icon: "https://img1a.flixcart.com/www/promos/new/20150811-140737-flipkart-app-icon.png",
+                data: {
+                    url : "/"
+                }
+            });
             var postData = JSON.stringify({
                 "registration_ids": [id]
             });
