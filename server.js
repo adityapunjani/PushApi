@@ -68,6 +68,20 @@ app.post('/api/register', function (req, res) {
     res.end("true");
 });
 
+app.post('/api/unregister', function (req, res) {
+    if (typeof req.body.id === 'string') {
+        var pos = req.body.id.lastIndexOf("/") + 1;
+        var id = req.body.id.substring(pos);
+        var ids = JSON.parse(fs.readFileSync('registrations.json'));
+        if (id && (ids.indexOf(id) !== -1)) {
+            ids.splice(ids.indexOf(id), 1);
+        }
+        fs.writeFileSync('registrations.json', JSON.stringify(ids));
+    }
+    res.set('Content-Type', 'application/json');
+    res.end("true");
+});
+
 
 var config = {
     host: 'android.googleapis.com',
